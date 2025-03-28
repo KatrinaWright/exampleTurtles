@@ -60,19 +60,8 @@ def draw_stack_container():
     
     # Clear any previous drawings
     stack_turtle.clear()
-    
-    # Draw container outline
-    stack_turtle.penup()
-    stack_turtle.goto(stack_x - 10, stack_y + 60)
-    stack_turtle.pendown()
-    stack_turtle.fillcolor("#f8f8f8")
-    stack_turtle.begin_fill()
-    for _ in range(2):
-        stack_turtle.forward(140)
-        stack_turtle.right(90)
-        stack_turtle.forward(350)
-        stack_turtle.right(90)
-    stack_turtle.end_fill()
+    move(stack_turtle, stack_x - 10, stack_y + 60)
+    draw_rectangle(stack_turtle, 140, -350, "#f8f8f8")
     
     # Draw title
     stack_turtle.penup()
@@ -103,22 +92,13 @@ def visualize_stack(function_name, action="push", color="lightblue"):
         frame_turtle = turtle.Turtle()
         frame_turtle.hideturtle()
         frame_turtle.speed(0)
-        frame_turtle.penup()
         
         # Calculate position based on how many items are in the stack
         y_pos = stack_y - (len(call_stack) - 1) * 30
         
         # Draw the rectangle
-        frame_turtle.goto(stack_x, y_pos)
-        frame_turtle.pendown()
-        frame_turtle.fillcolor(color)
-        frame_turtle.begin_fill()
-        for _ in range(2):
-            frame_turtle.forward(120)
-            frame_turtle.right(90)
-            frame_turtle.forward(25)
-            frame_turtle.right(90)
-        frame_turtle.end_fill()
+        move(frame_turtle, stack_x, y_pos)
+        draw_rectangle(frame_turtle, 120, -25, color)
         
         # Write the function name
         frame_turtle.penup()
@@ -183,6 +163,12 @@ def draw_rectangle(t, width, height, fill_color=None):
     if fill_color:
         t.end_fill()
 
+def move(t, x, y):
+    """Helper to move the turtle"""
+    t.penup()
+    t.goto(x, y)
+    t.pendown()
+
 def add_label(t, x, y, text, font_size=10, font_style="normal", alignment="center"):
     """Helper to add a text label"""
     t.penup()
@@ -193,22 +179,13 @@ def add_label(t, x, y, text, font_size=10, font_style="normal", alignment="cente
 @preserve_state
 def draw_barn(t):
     """Draw a simple barn"""
-    # Position barn on the ground
-    t.penup()
-    t.goto(-300, -150)  # Now on the ground level
-    t.pendown()
-    
     # Draw barn body
     t.color("darkred")
-    t.fillcolor("#C0392B")
-    t.begin_fill()
-    draw_rectangle(t, 150, 100)
-    t.end_fill()
+    move(t, -300, -150)
+    draw_rectangle(t, 150, 100, "#C0392B")
     
     # Draw roof
-    t.penup()
-    t.goto(-300, -50)  # Adjusted for new barn position
-    t.pendown()
+    move(t, -300, -50)
     t.fillcolor("#7F8C8D")
     t.begin_fill()
     t.goto(-225, 0)  # Peak of roof
@@ -217,34 +194,21 @@ def draw_barn(t):
     t.end_fill()
     
     # Draw door
-    t.penup()
-    t.goto(-240, -150)  # Door at ground level
-    t.pendown()
-    t.fillcolor("#784212")
-    t.begin_fill()
-    draw_rectangle(t, 30, 50)
-    t.end_fill()
+    move(t, -240, -150)
+    draw_rectangle(t, 30, 50, "#784212")
     
     # Draw windows
     for window_x in [-280, -195]:
-        t.penup()
-        t.goto(window_x, -80)
-        t.pendown()
-        t.fillcolor("#F7DC6F")
-        t.begin_fill()
-        draw_rectangle(t, 25, 25)
-        t.end_fill()
+        move(t, window_x, -80)
+        draw_rectangle(t, 25, 25, "#F7DC6F")
     
     # Label
     add_label(t, -225, -170, "draw_barn()", 12)
 
 def draw_corn_plant(t, x, y):
     """Draw an individual corn plant"""
-    t.penup()
-    t.goto(x, y)
-    t.pendown()
-    
     # Draw stalk
+    move(t, x, y)
     t.color("darkgreen")
     t.pensize(3)
     t.setheading(90)  # Point up
@@ -269,20 +233,15 @@ def draw_corn_plant(t, x, y):
 
 def draw_tomato_plant(t, x, y):
     """Draw an individual tomato plant"""
-    t.penup()
-    t.goto(x, y)
-    t.pendown()
-    
     # Draw stem
+    move(t, x, y)
     t.color("green")
     t.pensize(2)
     t.setheading(90)  # Point up
     t.forward(50)
     
     # Draw leaves
-    t.penup()
-    t.goto(x, y + 40)
-    t.pendown()
+    move(t, x, y + 40)
     t.fillcolor("green")
     t.begin_fill()
     t.circle(10)
@@ -290,9 +249,7 @@ def draw_tomato_plant(t, x, y):
     
     # Draw tomatoes
     for tomato_pos in [(x + 12, y + 30), (x - 8, y + 25)]:
-        t.penup()
-        t.goto(tomato_pos)
-        t.pendown()
+        move(t, tomato_pos[0], tomato_pos[1])
         t.fillcolor("#FF6347")  # Tomato color
         t.begin_fill()
         t.circle(8)
@@ -324,9 +281,7 @@ def draw_carrot_plant(t, x, y):
         t.goto(leaf[2])
     
     # Draw carrot
-    t.penup()
-    t.goto(x, y)
-    t.pendown()
+    move(t, x, y)
     t.color("orange")
     t.pensize(6)
     t.setheading(270)  # Point down
@@ -391,25 +346,18 @@ def plant_crops(t):
 @preserve_state
 def draw_fence(t):
     """Draw a fence around the farm"""
-    t.penup()
-    t.goto(-400, -150)
-    t.pendown()
-    
+    move(t, -400, -150)
     t.color("saddlebrown")
     t.pensize(3)
     
     # Draw horizontal fence boards
     for y in [0, 30]:
-        t.penup()
-        t.goto(-400, -150 + y)
-        t.pendown()
+        move(t, -400 , -150 + y)
         t.forward(800)
     
     # Draw vertical posts
     for x in range(-400, 401, 100):
-        t.penup()
-        t.goto(x, -150)
-        t.pendown()
+        move(t, x, -150)
         t.setheading(90)  # Up
         t.forward(40)
     
@@ -428,14 +376,9 @@ def draw_farm():
     screen.bgcolor("#87CEEB")
     
     # Draw ground
-    t.penup()
-    t.goto(-500, -150)
-    t.pendown()
     t.color("saddlebrown")
-    t.fillcolor("#8B4513")
-    t.begin_fill()
-    draw_rectangle(t, 1000, 250)
-    t.end_fill()
+    move(t, -500, -150)
+    draw_rectangle(t, 1000, -250, "#8B4513")
     
     # Draw components of the farm
     draw_barn(t)
