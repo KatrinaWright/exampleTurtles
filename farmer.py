@@ -1,4 +1,3 @@
-
 import turtle
 import time
 
@@ -25,7 +24,7 @@ def setup():
     stack_turtle = turtle.Turtle()
     stack_turtle.speed(0)
     stack_turtle.hideturtle()
-    stack_turtle.penup()
+    stack_turtle.penup() 
     
     # Create a turtle for explanatory text
     text_turtle = turtle.Turtle()
@@ -389,35 +388,86 @@ def draw_carrot_plant(t, x, y):
     t.color("darkgreen")
     t.pensize(2)
     
-    # First leaves
+    # Create more realistic foliage with feathery leaves
+    for angle in range(0, 180, 35):
+        # Draw a feathery leaf
+        t.penup()
+        t.goto(x, y)
+        t.setheading(90 + angle)  # Vary direction for natural look
+        t.pendown()
+        
+        # Draw stem
+        t.forward(15)
+        
+        # Draw leaf segments on both sides
+        current_pos = t.position()
+        for i in range(2):
+            t.penup()
+            t.goto(current_pos)
+            t.pendown()
+            
+            # Left side leaf segments
+            t.left(30)
+            t.forward(8)
+            t.backward(8)
+            
+            # Right side leaf segments
+            t.right(60)
+            t.forward(8)
+            t.backward(8)
+            
+            # Reset direction and move up for next segment
+            t.left(30)
+            t.forward(5)
+            current_pos = t.position()
+    
+    # Draw carrot root with tapered shape
     t.penup()
-    t.goto(x - 10, y - 10)
-    t.pendown()
     t.goto(x, y)
-    t.goto(x + 10, y - 10)
-    
-    # Second leaves
-    t.penup()
-    t.goto(x - 7, y - 5)
     t.pendown()
-    t.goto(x, y + 5)
-    t.goto(x + 7, y - 5)
     
-    # Third leaves
-    t.penup()
-    t.goto(x - 5, y)
-    t.pendown()
-    t.goto(x, y + 10)
-    t.goto(x + 5, y)
+    # Use fill for a more solid carrot
+    t.fillcolor("#FF7F00")  # Brighter orange
+    t.begin_fill()
     
-    # Draw carrot
-    t.penup()
-    t.goto(x, y)
-    t.pendown()
-    t.color("orange")
-    t.pensize(6)
+    # Draw the right side of carrot
     t.setheading(270)  # Point down
-    t.forward(40)
+    t.forward(10)
+    
+    # Create tapered edge on right
+    t.right(10)
+    t.forward(15)
+    t.right(10)
+    t.forward(15)
+    
+    # Draw the bottom point
+    t.right(10)
+    t.forward(5)
+    
+    # Create tapered edge on left
+    t.right(140)
+    t.forward(15)
+    t.left(10)
+    t.forward(15)
+    t.left(10)
+    t.forward(10)
+    
+    t.end_fill()
+    
+    # Add some texture/detail to the carrot
+    t.penup()
+    t.goto(x, y - 15)
+    t.pendown()
+    t.pensize(1)
+    t.color("#E67300")  # Darker orange for details
+    
+    # Draw some lines for texture
+    for i in range(-3, 4, 3):
+        t.penup()
+        t.goto(x + i, y - 10)
+        t.pendown()
+        t.setheading(270)
+        t.forward(25)
     
     t.penup()
 
