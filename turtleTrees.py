@@ -1,6 +1,7 @@
 import turtle
+import random
 
-def triangle(size, color):
+def triangle(size, color, turtle):
   turtle.color(color)
   turtle.fillcolor(color)
   turtle.begin_fill()
@@ -10,7 +11,7 @@ def triangle(size, color):
   turtle.end_fill()
     
     
-def up(distance):
+def up(distance, turtle):
   turtle.penup()
   turtle.left(90)
   turtle.forward(distance)
@@ -18,78 +19,79 @@ def up(distance):
   turtle.forward(distance/4)
   turtle.pendown()
   
-def stump(size, color):
+def stump(size, color, x, y, turtle):
   turtle.penup()
+  turtle.goto(x, y)
   turtle.forward(size*(5/8))
   turtle.pendown()
   turtle.color("brown")
   turtle.fillcolor("brown")
   turtle.begin_fill()
-  for i in range(4):
-    turtle.right(90)
+  for i in range(5):
+    turtle.left(90)
     turtle.forward(size/4)
   turtle.end_fill()
+  turtle.right(90)
   turtle.color(color)
   turtle.back(size*(5/8))
   
-def tree(size, color):
-  stump(size, color)
-  for i in range(size, 20, -10):
-    triangle(i, color)
-    up(20)
+def tree(size, color, x, y, t):
+
+  random_size = random.randint(50, size) % 150 + 20
+  stump(random_size, color, x, y, t)
+  for i in range(random_size, 20, -10):
+    triangle(i, color, t)
+    up(20, t)
   
-  # triangle(50, color)
-  # up(20)
-  # triangle(40, color)
-  # up(20)
-  # triangle(30, color)
-  # up(20)
 
-# Clear the screen and set starting position
-turtle.clear()
-turtle.penup()
-turtle.goto(-300, -200)  # Start from the left-bottom
-turtle.pendown()
+def setup_screen():
+  canvas = turtle.Screen()
+  canvas.setup(width=800, height=600)
+  canvas.bgcolor("burlywood")
+  t = turtle.Turtle()
+  t.speed(0)
+  return canvas, t
+def grid_transitions(x, r):
+  
+  color_parameters = {
+    "spring": ["lightgreen", "pink", "turquoise", "palegreen", "aquamarine", "khaki", "plum", "springgreen", "mediumspringgreen", "mediumaquamarine", "mediumturquoise", "mediumseagreen"],
+    "summer": ["darkgreen", "green", "teal", "YellowGreen", "OliveDrab", "LimeGreen" ],
+    "fall": ["orange", "red", "yellow", "OrangeRed", "brown", "coral", "goldenrod", "gold", "tomato"],
+    "winter": ["chocolate", "tan", "teal", "saddlebrown", "lavender", "wheat", "beige", "thistle", "mistyrose"]
+  }
 
-# Spring: Light green trees
-for i in range(3):
-    tree(50 + i * 10, "lightgreen")
-    turtle.penup()
-    turtle.forward(75)
-    turtle.pendown()
+  length_list = [-400, -200, 0, 200, 400]
+  color = color_parameters["spring"]
+  if x < length_list[1] and x >= length_list[0]:
+    color = color_parameters["spring"]
+  elif x < length_list[2] and x >= length_list[1]:
+    color = color_parameters["summer"]
+  elif x < length_list[3] and x >= length_list[2]:
+    color = color_parameters["fall"]
+  elif x < length_list[4] and x >= length_list[3]:
+    color = color_parameters["winter"]  
+  modifier = r % len(color)
 
-# Summer: Dark green trees
-for i in range(3):
-    tree(50 + i * 10, "darkgreen")
-    turtle.penup()
-    turtle.forward(75)
-    turtle.pendown()
+  return color[modifier]
 
-# Fall: Orange and red trees
-for i in range(3):
-    tree(50 + i * 10, ["orange", "red"][i % 2])  # Alternate colors
-    turtle.penup()
-    turtle.forward(75)
-    turtle.pendown()
+def main():
+  canvas, t = setup_screen()
+  prev = 0
+  for j in range(100, -300, -58):
+    for i in range(-400, 401, 83):
+      odd_calc = random.randint(0, 15)
+      if odd_calc <= prev:
+        color = grid_transitions(i - odd_calc, odd_calc)
+        tree(200 - j + odd_calc, color, i-odd_calc, j - 5, t)
+      elif odd_calc % 7 == 0:
+        color = grid_transitions(i + odd_calc, odd_calc)
+        tree(200 - j + odd_calc, color, i+ odd_calc, j+5, t)
+      else:
+        color = grid_transitions(i, odd_calc)
+        tree(200 - j + odd_calc, color, i, j, t)
+      prev = odd_calc
 
-# Winter: Brown trees (bare) with optional white "snow"
-for i in range(3):
-    tree(50 + i * 10, "brown")
-    # Optional: Add small white triangles on top for snow
-    turtle.penup()
-    turtle.forward(10)
-    turtle.left(90)
-    turtle.forward(50 + i * 10)  # Move to top of tree
-    turtle.right(90)
-    turtle.pendown()
-    triangle(10, "white")  # Small snow triangle
-    turtle.penup()
-    turtle.right(90)
-    turtle.back(50 + i * 10)  # Return to base
-    turtle.left(90)
-    turtle.back(10)
-    turtle.forward(75)  # Move to next tree position
-    turtle.pendown()
+  turtle.done()
 
-turtle.hideturtle()  # Hide the turtle cursor at the end
-turtle.done()  # Keep the window open
+if __name__ == "__main__":
+  main()
