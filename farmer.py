@@ -214,7 +214,7 @@ def draw_barn(t):
     
     # Label
     t.penup()
-    t.goto(-225, -170)
+    t.goto(-225, 100)
     t.write("draw_barn()", align="center", font=("Arial", 12, "normal"))
     
     # Return to original position
@@ -243,8 +243,8 @@ def plant_corn_row(t, start_x, start_y):
     
     # Label
     t.penup()
-    t.goto(start_x + 60, start_y - 30)
-    t.write("plant_corn_row()", align="center", font=("Arial", 10, "normal"))
+    t.goto(start_x + 40, start_y + 130)
+    t.write("plant_corn_row()", align="center", font=("Arial", 12, "normal"))
     
     # Return to original position
     t.penup()
@@ -301,8 +301,8 @@ def plant_tomato_row(t, start_x, start_y):
     
     # Label
     t.penup()
-    t.goto(start_x + 60, start_y - 30)
-    t.write("plant_tomato_row()", align="center", font=("Arial", 10, "normal"))
+    t.goto(start_x + 40, start_y + 130)
+    t.write("plant_tomato_row()", align="center", font=("Arial", 12, "normal"))
     
     # Return to original position
     t.penup()
@@ -369,8 +369,8 @@ def plant_carrot_row(t, start_x, start_y):
     
     # Label
     t.penup()
-    t.goto(start_x + 60, start_y - 30)
-    t.write("plant_carrot_row()", align="center", font=("Arial", 10, "normal"))
+    t.goto(start_x + 40, start_y + 130)
+    t.write("plant_carrot_row()", align="center", font=("Arial", 12, "normal"))
     
     # Return to original position
     t.penup()
@@ -479,12 +479,11 @@ def plant_crops(t):
     plant_corn_row(t, 0, -150)
     plant_tomato_row(t, 150, -150)
     plant_carrot_row(t, 300, -150)
-    
-    # Add a label
+                                                          
     t.penup()
-    t.goto(180, -210)
+    t.goto(180, 100)                                                            # Move Above other planting labels
     t.color("black")
-    t.write("plant_crops()", align="center", font=("Arial", 14, "bold"))
+    t.write("plant_crops()", align="center", font=("Arial", 12, "bold"))        # Add a label
     
     visualize_stack("plant_crops()", "pop")
 
@@ -499,7 +498,6 @@ def draw_fence(t):
     t.penup()
     t.goto(-400, -150)
     t.pendown()
-    
     t.color("saddlebrown")
     t.pensize(3)
     
