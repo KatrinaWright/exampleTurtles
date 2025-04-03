@@ -480,11 +480,11 @@ def plant_crops(t):
     plant_tomato_row(t, 150, -150)
     plant_carrot_row(t, 300, -150)
     
-    # Add a label
+    # Add a label for better visibility
     t.penup()
     t.goto(180, -210)
     t.color("black")
-    t.write("plant_crops()", align="center", font=("Arial", 14, "bold"))
+    t.write("Plant Crops", align="center", font=("Arial", 16, "bold"))
     
     visualize_stack("plant_crops()", "pop")
 
