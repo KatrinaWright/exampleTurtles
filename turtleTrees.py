@@ -93,7 +93,7 @@ def main():
         tree(200 - y_coordinate + random_number, color, x_coordinate, y_coordinate, turtle)
       previous = random_number
 
-  turtle.done()
+  t.done()
 
 if __name__ == "__main__":
   main()
