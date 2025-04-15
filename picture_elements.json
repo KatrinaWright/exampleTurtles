@@ -1,0 +1,48 @@
+
+{
+    "elements": [
+      {
+        "name": "tree",
+        "type": "recursive",
+        "parameters": {
+          "x": [-150, 0, 150],
+          "y": [-150, -150, -150],
+          "size": [100, 80, 120],
+          "levels": [3, 4, 5],
+          "angle": [20, 25, 30],
+          "color": ["green", "dark green", "forest green"]
+        }
+      },
+      {
+        "name": "sun",
+        "type": "simple",
+        "parameters": {
+          "x": [200],
+          "y": [200],
+          "size": [50],
+          "color": ["yellow"]
+        }
+      },
+      {
+        "name": "house",
+        "type": "composite",
+        "parameters": {
+          "x": [0],
+          "y": [0],
+          "size": [100],
+          "roof_color": ["red"],
+          "wall_color": ["brown"]
+        }
+      },
+      {
+        "name": "flower",
+        "type": "simple",
+        "parameters": {
+          "x": [-200, -180, -160, 160, 180, 200],
+          "y": [-120, -100, -80, -120, -100, -80],
+          "size": [20, 15, 25, 20, 15, 25],
+          "color": ["red", "purple", "pink", "orange", "yellow", "white"]
+        }
+      }
+    ]
+  }

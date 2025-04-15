@@ -1,0 +1,89 @@
+{
+    "canvas_settings": {
+        "width": 800,
+        "height": 600,
+        "background_color": "white"
+    },
+    "drawing_elements": {
+        "basic_shapes": {
+            "polygon": {
+                "parameters": ["sides", "size", "color", "fill"],
+                "description": "Draws a regular polygon with specified number of sides",
+                "position": "Any quadrant",
+                "recursive_potential": "Can create nested polygons with decreasing sizes"
+            },
+            "circle": {
+                "parameters": ["radius", "color", "fill"],
+                "description": "Draws a circle or arc",
+                "position": "Any quadrant",
+                "recursive_potential": "Can create concentric circles or spiral patterns"
+            },
+            "star": {
+                "parameters": ["points", "inner_size", "outer_size", "color", "fill"],
+                "description": "Draws a star with specified number of points",
+                "position": "Center or corners",
+                "recursive_potential": "Can create nested stars with varying sizes and rotations"
+            }
+        },
+        "complex_patterns": {
+            "spiral": {
+                "parameters": ["loops", "growth_factor", "color"],
+                "description": "Creates a spiral pattern",
+                "position": "Center expanding outward",
+                "recursive_potential": "Can branch into multiple spirals"
+            },
+            "tree": {
+                "parameters": ["trunk_length", "angle", "depth", "color"],
+                "description": "Draws a recursive tree structure",
+                "position": "Usually bottom center, growing upward",
+                "recursive_potential": "Natural recursive branching with configurable depth"
+            },
+            "snowflake": {
+                "parameters": ["size", "depth", "color"],
+                "description": "Creates a Koch snowflake or similar fractal",
+                "position": "Center",
+                "recursive_potential": "Fractal pattern with configurable depth"
+            }
+        },
+        "decorative_elements": {
+            "flower": {
+                "parameters": ["petals", "size", "color"],
+                "description": "Draws a flower pattern",
+                "position": "Any quadrant or as part of tree endpoints",
+                "recursive_potential": "Can create flowers with recursive petal patterns"
+            },
+            "grid": {
+                "parameters": ["rows", "columns", "cell_size", "color"],
+                "description": "Creates a grid pattern for organizing other elements",
+                "position": "Full canvas or specific quadrant",
+                "recursive_potential": "Can subdivide cells recursively"
+            }
+        }
+    },
+    "sample_configurations": [
+        {
+            "name": "Basic Garden",
+            "elements": [
+                {"type": "tree", "params": {"trunk_length": 100, "angle": 30, "depth": 3}},
+                {"type": "flower", "params": {"petals": 8, "size": 30}},
+                {"type": "circle", "params": {"radius": 50, "fill": true}}
+            ]
+        },
+        {
+            "name": "Night Sky",
+            "elements": [
+                {"type": "star", "params": {"points": 5, "outer_size": 50}},
+                {"type": "circle", "params": {"radius": 40}},
+                {"type": "spiral", "params": {"loops": 3, "growth_factor": 1.5}}
+            ]
+        },
+        {
+            "name": "Fractal Art",
+            "elements": [
+                {"type": "snowflake", "params": {"size": 100, "depth": 3}},
+                {"type": "polygon", "params": {"sides": 6, "size": 80}},
+                {"type": "grid", "params": {"rows": 3, "columns": 3, "cell_size": 100}}
+            ]
+        }
+    ]
+}
